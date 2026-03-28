@@ -356,7 +356,13 @@
 "Assets/Resources/GUI Kit The Stone/Scripts/PanelControl.cs"
 "Assets/Script/Camera/CameraFollow.cs"
 "Assets/Script/Character/Base/Character.cs"
+"Assets/Script/Character/Base/Damage.cs"
+"Assets/Script/Character/Player/ConsumingStamina.cs"
+"Assets/Script/Character/Player/GetHit.cs"
+"Assets/Script/Character/Player/Player.cs"
+"Assets/Script/Character/Player/PlayerAttack.cs"
 "Assets/Script/Character/Player/PlayerMove.cs"
+"Assets/Script/Character/Player/PlayerParry.cs"
 -langversion:9.0
 /deterministic
 /optimize-
