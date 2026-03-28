@@ -35,7 +35,6 @@ public class PlayerAttack : MonoBehaviour
 
     void Attack()
     {
-       
         if (Input.GetKeyDown(KeyCode.J)&&!playerMove.IsRolling&&!player.StaminaEmpty&&!playerParry.IsDefensing)
         {
             player.ConsumeStamina(consumingStamina.consumingStamina);
