@@ -8,7 +8,6 @@ public class Character : MonoBehaviour
     // Start is called before the first frame update
     public int MaxHP;
     public int CurrentHP;
-    public float MoveSpeed;
     
     public bool IsGrounded = true;
     
@@ -37,5 +36,10 @@ public class Character : MonoBehaviour
         {
             IsGrounded = false;
         }
+    }
+
+    public void Die()
+    {
+        Debug.Log("The character is dead");
     }
 }
