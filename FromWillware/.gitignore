@@ -10,7 +10,6 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
-.DS_Store/
 *.log
 
 # macOS 系统文件
