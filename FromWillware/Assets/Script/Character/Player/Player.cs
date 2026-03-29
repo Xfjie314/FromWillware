@@ -51,8 +51,33 @@ public class Player : Character
 
     public void Die()
     {
+        if (IsDead) return;
+
         IsDead = true;
+
+        // 1. 播放死亡动画
         animator.SetTrigger("Die");
-        //transform.gameObject.SetActive(false);
+
+        // 2. 禁用移动、攻击、防御脚本
+        var move = GetComponent<PlayerMove>();
+        if (move != null) move.enabled = false;
+
+        var attack = GetComponent<PlayerAttack>();
+        if (attack != null) attack.enabled = false;
+
+        var parry = GetComponent<PlayerParry>();
+        if (parry != null) parry.enabled = false;
+
+        // 3. 可选：锁定刚体，防止被推动
+        var rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = Vector3.zero;
+            rb.isKinematic = true; // 阻止物理干扰
+        }
+
+        // 4. 可选：锁定相机（视角不跟随）
+        // var camFollow = Camera.main.GetComponent<CameraFollow>();
+        // if (camFollow != null) camFollow.enabled = false;
     }
 }

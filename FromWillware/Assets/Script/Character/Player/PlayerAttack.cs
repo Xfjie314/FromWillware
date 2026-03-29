@@ -16,6 +16,11 @@ public class PlayerAttack : MonoBehaviour
     
     public bool IsAttacking;
     public bool EnableAttacking = true;
+
+    public bool EnableCombo1 = true;
+    public bool EnableCombo2;
+    public bool EnableCombo3;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -44,9 +49,9 @@ public class PlayerAttack : MonoBehaviour
             animator.SetFloat("AttackSpeed",attackSpeed);
             player.ConsumeStamina(stamina);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            animator.SetTrigger("OutSlash");
+            animator.SetTrigger("Combo1");
+            //else if(EnableCombo2) animator.SetTrigger("Combo2");
         }
-            
     }
 
     public void SetIsAttacking()
@@ -67,5 +72,32 @@ public class PlayerAttack : MonoBehaviour
     public void DisableWeapon()
     {
         currentWeaponCollider.enabled = false;
+    }
+    
+    //设置Combo
+    public void SetCombo1()
+    {
+        EnableCombo1 = true;
+    }
+    public void SetCombo2()
+    {
+        EnableCombo2 = true;
+    }
+
+    public void SetCombo3()
+    {
+        EnableCombo3 = true;
+    }
+    public void ResetCombo1()
+    {
+        EnableCombo1 = false;
+    }
+    public void ResetCombo2()
+    {
+        EnableCombo2 = false;
+    }
+    public void ResetCombo3()
+    {
+        EnableCombo3 = false;
     }
 }
