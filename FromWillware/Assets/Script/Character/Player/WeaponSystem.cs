@@ -19,6 +19,7 @@ public class WeaponSystem : MonoBehaviour
         {
             Weapons.Add(child);
             child.gameObject.SetActive(false);
+            child.GetComponentInChildren<Collider>().enabled = false;
         }
         if(Weapons.Count > 0)
             EquipWeapon(0);
