@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConsumingStamina : MonoBehaviour
+public class BackPack : MonoBehaviour
 {
     // Start is called before the first frame update
-    public int consumingStamina;
+    public int MaxSize;
+    public int CurrentCount;
+    public int CurrentIndex;
+    
     void Start()
     {
         

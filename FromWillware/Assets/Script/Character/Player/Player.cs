@@ -9,13 +9,13 @@ public class Player : Character
     public float StaminaRecoverRate;
     public bool StaminaEmpty;
 
-    private ConsumingStamina consumingStamina;
+   
     // Start is called before the first frame update
     void Start()
     {
         CurrentHP = MaxHP;
         CurrentStamina = MaxStamina;
-        consumingStamina = GetComponent<ConsumingStamina>();
+     
     }
 
     // Update is called once per frame
