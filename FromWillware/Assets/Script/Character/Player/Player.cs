@@ -25,7 +25,7 @@ public class Player : Character
     void Update()
     {
         RecoverStamina();
-        if (CurrentStamina <= 0)
+        if (CurrentStamina <= 1)
         {
             StaminaEmpty = true;
         }

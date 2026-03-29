@@ -17,6 +17,10 @@ public class Weapon : MonoBehaviour
     void Start()
     {
         damage = GetComponentInChildren<Damage>(true);
+        if (damage == null)
+        {
+            Debug.Log(gameObject.name + " has no damage");
+        }
         WeaponDamage = damage.damage;
         weaponCollider =  GetComponentInChildren<Collider>();
     }
