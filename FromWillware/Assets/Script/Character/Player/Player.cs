@@ -8,13 +8,16 @@ public class Player : Character
     public float CurrentStamina;
     public float StaminaRecoverRate;
     public bool StaminaEmpty;
+    
 
+    private Animator animator;
    
     // Start is called before the first frame update
     void Start()
     {
         CurrentHP = MaxHP;
         CurrentStamina = MaxStamina;
+        animator = GetComponent<Animator>();
      
     }
 
@@ -44,5 +47,12 @@ public class Player : Character
             CurrentStamina += StaminaRecoverRate * Time.deltaTime;
             CurrentStamina = Mathf.Clamp(CurrentStamina, -20, MaxStamina);//限制精力的范围0~MaxStamina
         }
+    }
+
+    public void Die()
+    {
+        IsDead = true;
+        animator.SetTrigger("Die");
+        //transform.gameObject.SetActive(false);
     }
 }

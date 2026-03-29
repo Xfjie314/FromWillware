@@ -112,15 +112,15 @@ public class PlayerMove : MonoBehaviour
     public void SetIsRolling()
     {
         IsRolling = true;
-        rb.velocity = Vector3.zero;
+        //rb.velocity = Vector3.zero;
         
     }
 
     public void ResetIsRolling()
     {
         IsRolling = false;
-        rb.velocity = Vector3.zero;
-        inputDir = Vector2.zero;
+        //rb.velocity = Vector3.zero;
+        //inputDir = Vector2.zero;
     }
     
     //设置NextRolling

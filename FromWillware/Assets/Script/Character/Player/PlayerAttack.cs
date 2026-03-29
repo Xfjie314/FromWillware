@@ -12,9 +12,9 @@ public class PlayerAttack : MonoBehaviour
     private PlayerParry playerParry;
     private WeaponSystem weaponSystem;
     private Transform currentWeapon;
+    private Collider currentWeaponCollider;
     
     public bool IsAttacking;
-
     public bool EnableAttacking = true;
     // Start is called before the first frame update
     void Start()
@@ -31,6 +31,7 @@ public class PlayerAttack : MonoBehaviour
     void Update()
     {
         currentWeapon = weaponSystem.CurrentWeapon;
+        currentWeaponCollider = currentWeapon.GetComponentInChildren<Collider>();
         Attack();
     }
 
@@ -56,5 +57,15 @@ public class PlayerAttack : MonoBehaviour
     public void ResetIsAttacking()
     {
         IsAttacking = false;
+    }
+
+    public void EnableWeapon()
+    {
+        currentWeaponCollider.enabled = true;
+    }
+
+    public void DisableWeapon()
+    {
+        currentWeaponCollider.enabled = false;
     }
 }

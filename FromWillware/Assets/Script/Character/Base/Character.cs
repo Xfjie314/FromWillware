@@ -10,6 +10,7 @@ public class Character : MonoBehaviour
     public int CurrentHP;
     
     public bool IsGrounded = true;
+    public bool IsDead;
     
     void Start()
     {

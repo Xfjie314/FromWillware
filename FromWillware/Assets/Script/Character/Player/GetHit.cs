@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GetHit : MonoBehaviour
@@ -19,6 +20,7 @@ public class GetHit : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(player.IsDead) return;
         player.CurrentHP -= damage;
         Debug.Log("The player has been hit " + damage);
         if (player.CurrentHP <= 0)
