@@ -10,8 +10,8 @@ public class PlayerAttack : MonoBehaviour
     private Rigidbody rb;
     private Player player;
     private PlayerParry playerParry;
-    [SerializeField]
-    private ConsumingStamina consumingStamina;
+    private WeaponSystem weaponSystem;
+    private Transform currentWeapon;
     
     public bool IsAttacking;
 
@@ -22,14 +22,15 @@ public class PlayerAttack : MonoBehaviour
         playerMove = GetComponent<PlayerMove>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        consumingStamina = GetComponentInChildren<ConsumingStamina>();
         player = GetComponent<Player>();
         playerParry = GetComponent<PlayerParry>();
+        weaponSystem = GetComponent<WeaponSystem>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentWeapon = weaponSystem.CurrentWeapon;
         Attack();
     }
 
@@ -37,7 +38,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J)&&!playerMove.IsRolling&&!player.StaminaEmpty&&!playerParry.IsDefensing)
         {
-            player.ConsumeStamina(consumingStamina.consumingStamina);
+            var stamina = currentWeapon.GetComponent<Weapon>().ConsumingStamina;
+            float attackSpeed = currentWeapon.GetComponent<Weapon>().AttackSpeed;
+            animator.SetFloat("AttackSpeed",attackSpeed);
+            player.ConsumeStamina(stamina);
             rb.velocity = new Vector3(0, rb.velocity.y, 0);
             animator.SetTrigger("OutSlash");
         }

@@ -45,7 +45,7 @@ public class PlayerParry : MonoBehaviour
         IsParrying = true;
 
         // 播放弹反动画
-        animator.SetTrigger("Parry");
+        //animator.SetTrigger("Parry");
 
         yield return new WaitForSeconds(ParryWindow);
 
