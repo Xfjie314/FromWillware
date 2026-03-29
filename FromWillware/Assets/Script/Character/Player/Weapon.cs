@@ -14,7 +14,7 @@ public class Weapon : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        damage = GetComponentInChildren<Damage>();
+        damage = GetComponentInChildren<Damage>(true);
         WeaponDamage = damage.damage;
     }
 
