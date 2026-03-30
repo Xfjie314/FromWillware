@@ -14,12 +14,13 @@ public class PlayerAttack : MonoBehaviour
     private Transform currentWeapon;
     private Collider currentWeaponCollider;
     
+    
+    private bool canCombo = false;
+    private bool inputBuffered = false;
+    
+    public int comboStep = 0;
     public bool IsAttacking;
     public bool EnableAttacking = true;
-
-    public bool EnableCombo1 = true;
-    public bool EnableCombo2;
-    public bool EnableCombo3;
     
     // Start is called before the first frame update
     void Start()
@@ -44,16 +45,79 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J)&&!playerMove.IsRolling&&!player.StaminaEmpty&&!playerParry.IsDefensing)
         {
-            var stamina = currentWeapon.GetComponent<Weapon>().ConsumingStamina;
-            float attackSpeed = currentWeapon.GetComponent<Weapon>().AttackSpeed;
-            animator.SetFloat("AttackSpeed",attackSpeed);
-            player.ConsumeStamina(stamina);
-            rb.velocity = new Vector3(0, rb.velocity.y, 0);
-            animator.SetTrigger("Combo1");
-            //else if(EnableCombo2) animator.SetTrigger("Combo2");
+           
+            if (IsAttacking)
+            {
+                inputBuffered = true;
+            }
+            else
+            {
+                StartAttack();
+            }
+            
         }
     }
 
+    void StartAttack()
+    {
+        var weapon = currentWeapon.GetComponent<Weapon>();
+    
+        animator.SetFloat("AttackSpeed", weapon.AttackSpeed);
+        
+
+        rb.velocity = new Vector3(0, rb.velocity.y, 0);
+
+        comboStep = 1;
+        if (comboStep == 1)
+        {
+            animator.SetTrigger("Combo1");
+            player.ConsumeStamina(weapon.ConsumingStamina);
+        }
+        IsAttacking = true;
+    }
+
+    public void EnableCombo()
+    {
+        canCombo = true;
+
+        if (inputBuffered)
+        {
+            inputBuffered = false;
+            DoNextCombo();
+        }
+    }
+    
+    void DoNextCombo()
+    {
+        var weapon = currentWeapon.GetComponent<Weapon>();
+        if (!canCombo) return;
+
+        comboStep++;
+        
+        if(comboStep==2)
+        {
+            animator.SetTrigger("Combo2");
+            player.ConsumeStamina(weapon.ConsumingStamina);
+        }
+        else if(comboStep==3)
+        {
+            animator.SetTrigger("Combo3");
+            player.ConsumeStamina(weapon.ConsumingStamina);
+        }
+        
+        canCombo = false;
+    }
+    
+    public void ResetCombo()
+    {
+        animator.SetInteger("ComboIndex", 0);
+        comboStep = 0;
+        IsAttacking = false;
+        canCombo = false;
+        inputBuffered = false;
+        Debug.Log("Combo Reset");
+    }
+    
     public void SetIsAttacking()
     {
         IsAttacking = true;
@@ -66,38 +130,14 @@ public class PlayerAttack : MonoBehaviour
 
     public void EnableWeapon()
     {
+        Debug.Log("Weapon On");
+        //Debug.Log("开启的Collider是: " + currentWeaponCollider.name);
         currentWeaponCollider.enabled = true;
     }
 
     public void DisableWeapon()
     {
+        
         currentWeaponCollider.enabled = false;
-    }
-    
-    //设置Combo
-    public void SetCombo1()
-    {
-        EnableCombo1 = true;
-    }
-    public void SetCombo2()
-    {
-        EnableCombo2 = true;
-    }
-
-    public void SetCombo3()
-    {
-        EnableCombo3 = true;
-    }
-    public void ResetCombo1()
-    {
-        EnableCombo1 = false;
-    }
-    public void ResetCombo2()
-    {
-        EnableCombo2 = false;
-    }
-    public void ResetCombo3()
-    {
-        EnableCombo3 = false;
     }
 }
