@@ -2297,7 +2297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7529c0f873d6c0b4db158599cdb4e532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHP: 45
+  MaxHP: 100
   CurrentHP: 0
   IsGrounded: 1
   IsDead: 0
@@ -2504,6 +2504,30 @@ PrefabInstance:
       propertyPath: CameraTransform
       value: 
       objectReference: {fileID: 963194228}
+    - target: {fileID: 7710216581080140098, guid: 03d310e8c496449e58c52d5f74b9513f, type: 3}
+      propertyPath: m_Height
+      value: 0.9936789
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710216581080140098, guid: 03d310e8c496449e58c52d5f74b9513f, type: 3}
+      propertyPath: m_Radius
+      value: 0.052285936
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710216581080140098, guid: 03d310e8c496449e58c52d5f74b9513f, type: 3}
+      propertyPath: m_Center.x
+      value: -0.022275602
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710216581080140098, guid: 03d310e8c496449e58c52d5f74b9513f, type: 3}
+      propertyPath: m_Center.y
+      value: 0.7146019
+      objectReference: {fileID: 0}
+    - target: {fileID: 7710216581080140098, guid: 03d310e8c496449e58c52d5f74b9513f, type: 3}
+      propertyPath: m_Center.z
+      value: -0.10243074
+      objectReference: {fileID: 0}
+    - target: {fileID: 9195412554368826702, guid: 03d310e8c496449e58c52d5f74b9513f, type: 3}
+      propertyPath: m_Name
+      value: Sword1Collider
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
