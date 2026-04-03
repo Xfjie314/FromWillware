@@ -5,9 +5,12 @@ public class CameraFollow : MonoBehaviour
     public Transform PlayerTransform;
     public float MouseSensitivity;
     public float Distance;
-
-    public float xRotation = 20f;
+    public float VerticalOffset = 1.5f;
+    public float LookAtOffset = 1.5f;
+    public float xRotation = 30f;
     public float yRotation = 0f;
+    public float MinDistance = 0.6f;
+    public LayerMask ObstacleLayerMask = ~0;
 
     void Update()
     {
@@ -24,7 +27,24 @@ public class CameraFollow : MonoBehaviour
         Quaternion rotation = Quaternion.Euler(xRotation, yRotation, 0);
         Vector3 direction = rotation * new Vector3(0, 0, -Distance);
 
-        transform.position = PlayerTransform.position + direction;
-        transform.LookAt(PlayerTransform);
+        Vector3 playerPosition = PlayerTransform.position + new Vector3(0, VerticalOffset, 0);
+        Vector3 targetPosition = playerPosition + direction;
+        
+        // 检测镜头与玩家之间是否有遮挡
+        float adjustedDistance = Distance;
+        RaycastHit hit;
+        if (Physics.Raycast(playerPosition, direction.normalized, out hit, Distance, ObstacleLayerMask))
+        {
+            // 如果有遮挡，将相机拉近到碰撞点
+            adjustedDistance = hit.distance - 0.5f;
+            adjustedDistance = Mathf.Max(adjustedDistance, MinDistance);
+        }
+        
+        // 计算最终相机位置
+        Vector3 adjustedDirection = rotation * new Vector3(0, 0, -adjustedDistance);
+        Vector3 cameraPosition = playerPosition + adjustedDirection;
+        
+        transform.position = cameraPosition;
+        transform.LookAt(PlayerTransform.position + new Vector3(0, LookAtOffset, 0));
     }
 }
