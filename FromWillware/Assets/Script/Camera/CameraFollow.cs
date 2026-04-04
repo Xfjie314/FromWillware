@@ -11,6 +11,8 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
+        //if (IsLocking) return;
+        
         float mouseX = Input.GetAxis("Mouse X") * MouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * MouseSensitivity * Time.deltaTime;
 
